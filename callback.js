@@ -1,6 +1,6 @@
-const generateScript = require('./login_script.js')
+import generateScript from 'C:/Users/natha_yjifvqj/.netlify/Angular_Project_Test_CMS-2/netlify-cms-github-oauth-provider/login_script.js'
 
-module.exports = (oauth2, oauthProvider) => {
+export default (oauth2, oauthProvider) => {
   function callbackMiddleWare (req, res, next) {
     const code = req.query.code
     var options = {

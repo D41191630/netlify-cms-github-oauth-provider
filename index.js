@@ -1,6 +1,6 @@
-const simpleOauthModule = require('simple-oauth2')
-const authMiddleWareInit = require('./auth.js')
-const callbackMiddleWareInit = require('./callback')
+import { AuthorizationCode } from 'simple-oauth2'
+import authMiddleWareInit from 'C:/Users/natha_yjifvqj/.netlify/Angular_Project_Test_CMS-2/netlify-cms-github-oauth-provider/auth.js'
+import callbackMiddleWareInit from 'C:/Users/natha_yjifvqj/.netlify/Angular_Project_Test_CMS-2/netlify-cms-github-oauth-provider/callback'
 const oauthProvider = process.env.OAUTH_PROVIDER || 'github'
 const loginAuthTarget = process.env.AUTH_TARGET || '_self'
 
@@ -17,7 +17,7 @@ const config = {
   }
 }
 
-const oauth2 = new simpleOauthModule.AuthorizationCode(config)
+const oauth2 = new AuthorizationCode(config)
 
 function indexMiddleWare (req, res) {
   res.send(`Hello<br>
@@ -26,9 +26,7 @@ function indexMiddleWare (req, res) {
     </a>`)
 }
 
-module.exports = {
-  auth: authMiddleWareInit(oauth2),
-  callback: callbackMiddleWareInit(oauth2, oauthProvider),
-  success: (req, res) => { res.send('') },
-  index: indexMiddleWare
-}
+export const auth = authMiddleWareInit(oauth2)
+export const callback = callbackMiddleWareInit(oauth2, oauthProvider)
+export function success(req, res) { res.send('') }
+export const index = indexMiddleWare
